@@ -51,8 +51,7 @@ class Helper:
 
 
 @mock.patch.dict(os.environ, {"PL_DEV_DEBUG": "1"})
-@pytest.mark.parametrize("accelerator", [None, "dp"])
-def test__logger_connector__epoch_result_store__train(tmpdir, accelerator):
+def test__logger_connector__epoch_result_store__train(tmpdir):
     """
     Tests that LoggerConnector will properly capture logged information
     and reduce them
@@ -81,7 +80,6 @@ def test__logger_connector__epoch_result_store__train(tmpdir, accelerator):
     model.val_dataloader = None
 
     trainer = Trainer(
-        accelerator=accelerator,
         default_root_dir=tmpdir,
         limit_train_batches=2,
         limit_val_batches=4,
