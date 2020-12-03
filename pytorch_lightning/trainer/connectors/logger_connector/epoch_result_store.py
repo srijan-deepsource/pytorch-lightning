@@ -406,7 +406,7 @@ class EpochResultStore:
             if self.trainer.move_metrics_to_cpu:
                 hook_result.cpu()
             elif self.trainer.use_dp:
-                hook_result = move_data_to_device(hook_result, torch.device("cuda", self.trainer.root_gpu))
+                hook_result.to(torch.device("cuda", self.trainer.root_gpu))
 
             self._internals[fx_name].append(
                 hook_result,

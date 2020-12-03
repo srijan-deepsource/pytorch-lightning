@@ -401,11 +401,14 @@ class Result(Dict):
             if isinstance(v, torch.Tensor):
                 self.__setitem__(k, v.detach())
 
-    def cpu(self):
-        """Move all self attributes to CPU."""
+    def to(self, device: torch.device):
+        """Move all self attributes to the given device."""
         for k, v in self.items():
             if isinstance(v, torch.Tensor):
-                self.__setitem__(k, v.cpu())
+                self.__setitem__(k, v.to(device))
+
+    def cpu(self):
+        self.to(torch.device("cpu"))
 
     def __repr__(self):
         self_copy = self.copy()
