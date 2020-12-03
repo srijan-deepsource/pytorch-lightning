@@ -20,7 +20,6 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 import torch
 
 from pytorch_lightning.core.step_result import Result
-from pytorch_lightning.utilities import move_data_to_device
 from pytorch_lightning.utilities.exceptions import MisconfigurationException
 
 
