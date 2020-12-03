@@ -387,3 +387,22 @@ def test_call_back_validator(tmpdir):
                                                       on_step=None,
                                                       on_epoch=None)
         assert result is None
+
+
+def test_epoch_results_cache_dp(tmpdir):
+
+    class TestModel(BoringModel):
+
+        def training_epoch_end(self, outputs):
+            for r in self.trainer.logger_connector.cached_results:
+                assert not isinstance(r, torch.Tensor) or r.device == torch.device("cuda", 0)
+
+    model = TestModel()
+    trainer = Trainer(
+        default_root_dir=tmpdir,
+        accelerator="dp",
+        gpus=2,
+        limit_train_batches=2,
+        limit_val_batches=2,
+    )
+    trainer.fit(model)
