@@ -82,7 +82,6 @@ def test__logger_connector__epoch_result_store__train(tmpdir, accelerator):
 
     trainer = Trainer(
         accelerator=accelerator,
-        gpus=(2 if accelerator == "dp" else None),
         default_root_dir=tmpdir,
         limit_train_batches=2,
         limit_val_batches=4,
