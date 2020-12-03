@@ -400,11 +400,11 @@ class Result(Dict):
             if isinstance(v, torch.Tensor):
                 self.__setitem__(k, v.detach())
 
-    def to(self, device: torch.device):
+    def to(self, *args, **kwargs):
         """Move all self attributes to the given device."""
         for k, v in self.items():
             if isinstance(v, torch.Tensor):
-                self.__setitem__(k, v.to(device))
+                self.__setitem__(k, v.to(*args, **kwargs))
 
     def cpu(self):
         """Move all self attributes to CPU."""
