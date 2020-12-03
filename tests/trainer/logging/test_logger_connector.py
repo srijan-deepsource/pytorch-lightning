@@ -404,5 +404,6 @@ def test_epoch_results_cache_dp(tmpdir):
         gpus=2,
         limit_train_batches=2,
         limit_val_batches=2,
+        max_epochs=1,
     )
     trainer.fit(model)
